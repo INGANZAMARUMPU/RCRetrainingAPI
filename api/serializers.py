@@ -9,7 +9,7 @@ class PersonelSerializer(serializers.ModelSerializer):
     email = serializers.SerializerMethodField()
     class Meta:
         model = Personnel
-        fields = ["telephone", "whatsapp_number", "facebook_account",\
+        fields = ["id","telephone", "whatsapp_number", "facebook_account",\
                 "tweeter_account", "instagram_account", "profile", "detail", \
                 "avatar", "is_environmentalist", "first_name", "last_name", "email"]
 
