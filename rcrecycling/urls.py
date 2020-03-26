@@ -18,11 +18,12 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
 from django.conf.urls.static import static
 from django.conf import settings
-from api.views import TokenPairView
+from api.views import TokenPairView, register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('login/', TokenPairView.as_view()),
     path('refresh/', TokenRefreshView.as_view()),
+    path('register/', register,)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
