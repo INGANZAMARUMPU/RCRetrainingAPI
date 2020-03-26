@@ -9,7 +9,7 @@ class Personnel(models.Model):
 	facebook_account = models.CharField(blank=True, null=True, max_length=60)
 	tweeter_account = models.CharField(max_length=60, null=True, blank=True)
 	instagram_account = models.CharField(max_length=60, null=True, blank=True)
-	profile = models.CharField(max_length=60, required=False)
+	profile = models.CharField(max_length=60, null=True)
 	detail = models.TextField()
 	avatar = models.ImageField(null=True, blank=True, upload_to="avatars/")
 	is_environmentalist = models.BooleanField(default=False)
