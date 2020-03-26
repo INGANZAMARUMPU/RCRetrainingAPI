@@ -53,6 +53,7 @@ class TokenPairSerializer(TokenObtainPairSerializer):
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         data['email'] = self.user.email
+        data['is_admin'] = self.user.personnel.is_environmentalist
         try:
             data['photo'] = self.user.personnel.avatar.url
         except:
