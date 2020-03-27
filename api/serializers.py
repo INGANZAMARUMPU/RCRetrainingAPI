@@ -7,6 +7,7 @@ class PersonelSerializer(serializers.ModelSerializer):
     first_name = serializers.SerializerMethodField()
     last_name = serializers.SerializerMethodField()
     email = serializers.SerializerMethodField()
+
     class Meta:
         model = Personnel
         fields = ["id","telephone", "whatsapp_number", "facebook_account",\
@@ -53,7 +54,8 @@ class TokenPairSerializer(TokenObtainPairSerializer):
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         data['email'] = self.user.email
-        data['is_admin'] = self.user.personnel.is_environmentalist
+        data['is_environmentalist'] = self.user.personnel.is_environmentalist
+        data['is_admin'] = self.user.is_staff
         try:
             data['photo'] = self.user.personnel.avatar.url
         except:

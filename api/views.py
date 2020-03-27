@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -25,7 +25,14 @@ class PersonelViewset(viewsets.ModelViewSet):
 	def list(self, request, *args, **kwargs):
 		queryset = Personnel.objects.filter(is_environmentalist=True)
 		serializer = PersonelSerializer(queryset, many=True)
-		return Response(serializer.data)
+		return Response(serializer.data, status.HTTP_200_OK)
+
+	@action(methods=['PUT', "PATCH"], detail=False, url_name="edit", url_path=r'edit')
+	def edit(self, request):
+		serializer = PersonelSerializer(request.user.personnel, data=request.data)
+		serializer.is_valid(raise_exception=True)
+		self.perform_update(serializer)
+		return Response(serializer.data, status.HTTP_200_OK)
 
 class DepotViewset(viewsets.ModelViewSet):
 	queryset = Depot.objects.all()
